@@ -39,7 +39,6 @@
             this.button1 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
-            this.errTimer = new System.Windows.Forms.Timer(this.components);
             this.listBox2 = new System.Windows.Forms.ListBox();
             this.button5 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -52,8 +51,8 @@
             this.плагинChromeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cAdESYandexToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.проверкаCAdESToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.autoinstBox = new System.Windows.Forms.ToolStripMenuItem();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -157,11 +156,6 @@
             this.checkBox2.UseVisualStyleBackColor = true;
             this.checkBox2.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
             // 
-            // errTimer
-            // 
-            this.errTimer.Interval = 3000;
-            this.errTimer.Tick += new System.EventHandler(this.errTimer_Tick);
-            // 
             // listBox2
             // 
             this.listBox2.FormattingEnabled = true;
@@ -216,7 +210,7 @@
             this.проверкаCAdESToolStripMenuItem,
             this.autoinstBox});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(200, 202);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(200, 180);
             // 
             // toolStripMenuItem2
             // 
@@ -267,13 +261,6 @@
             this.проверкаCAdESToolStripMenuItem.Text = "Проверка CAdES";
             this.проверкаCAdESToolStripMenuItem.Click += new System.EventHandler(this.проверкаCAdESToolStripMenuItem_Click);
             // 
-            // progressBar1
-            // 
-            this.progressBar1.Location = new System.Drawing.Point(299, 87);
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(172, 10);
-            this.progressBar1.TabIndex = 18;
-            // 
             // autoinstBox
             // 
             this.autoinstBox.CheckOnClick = true;
@@ -281,6 +268,13 @@
             this.autoinstBox.Size = new System.Drawing.Size(199, 22);
             this.autoinstBox.Text = "Автоустановка";
             this.autoinstBox.Click += new System.EventHandler(this.autoinstBox_Click);
+            // 
+            // progressBar1
+            // 
+            this.progressBar1.Location = new System.Drawing.Point(299, 87);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(172, 10);
+            this.progressBar1.TabIndex = 18;
             // 
             // Form1
             // 
@@ -310,6 +304,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "CryptoPRO Helper";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseDoubleClick);
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
@@ -328,7 +323,6 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.CheckBox checkBox2;
-        private System.Windows.Forms.Timer errTimer;
         private System.Windows.Forms.ListBox listBox2;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Label label1;

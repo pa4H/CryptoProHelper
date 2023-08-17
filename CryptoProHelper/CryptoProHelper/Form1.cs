@@ -13,6 +13,8 @@ namespace CryptoProHelper
 {
     public partial class Form1 : Form
     {
+        string[] startArgs;
+        bool startArgsInstallError = false;
         List<string> certs = new List<string>();
         string filesDir = Path.GetTempPath() + @"\CryptoProHelper";
         string SID = "";
@@ -25,6 +27,7 @@ namespace CryptoProHelper
         {
             InitializeComponent();
             if (!Directory.Exists(@"C:\Program Files\Crypto Pro\CSP")) { MessageBox.Show("Проверьте путь:\nC:\\Program Files\\Crypto Pro\\CSP", "CryptoPro не обнаружен", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+            startArgs = args;
             this.Width = 500;
             try
             {
@@ -83,26 +86,6 @@ namespace CryptoProHelper
             }
 
             #endregion
-            #region Start Args
-            try
-            {
-                if (args.Length > 0)
-                {
-                    foreach (string file in args)
-                    {
-                        addWays(file);
-                    }
-                    if (autoinstBox.Checked)
-                    {
-                        button1_Click(null, null);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Start Args", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            #endregion
         }
         #region CryptoPro
         void gogogo(string folderPath, int pos)
@@ -146,6 +129,8 @@ namespace CryptoProHelper
             if (getNewContainer() == "")
             {
                 replaceListBox(pos, " - уже установлено!");
+                SystemSounds.Hand.Play();
+                startArgsInstallError = true;
             }
             else
             {
@@ -232,7 +217,7 @@ namespace CryptoProHelper
             string[] dirs = Directory.GetDirectories(way);
             foreach (var item in dirs)
             {
-                if (item.Contains(".000"))
+                if (item.Contains(".00"))
                 {
                     string[] buf = item.Split('\\');
                     return buf[buf.Length - 1]; // Возвращаем имя контейнера
@@ -301,7 +286,6 @@ namespace CryptoProHelper
             {
                 if (item.Length > 1) { return item.Replace("\r", ""); }
             }
-            showError("Выбранный сертификат уже установлен");
             return "";
         }
         void copy(string from, string to)
@@ -324,7 +308,7 @@ namespace CryptoProHelper
                 way = way.Replace("\\" + a[a.Length - 1], ""); // Убираем Иванов.cer
                 if (getContainerName(way) == "") // Если в папке с сертом нет закрытого ключа, выводим ошибку
                 {
-                    MessageBox.Show("В папке с сертификатом отсутствует закрытый контейнер", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    showError("В папке с сертификатом отсутствует закрытый контейнер: " + way);
                     return;
                 }
             }
@@ -332,19 +316,19 @@ namespace CryptoProHelper
             {
                 if (getContainerName(way) == "" && getCertName(way) == "")
                 {
-                    showError("В папке отсутствует сертификат и закрытый контейнер");
+                    showError("Отсутствует сертификат и закрытый контейнер: " + way);
                     return;
                 }
                 else
                 {
                     if (getContainerName(way) == "")
                     {
-                        showError("В папке отсутствует закрытый контейнер");
+                        showError("Отсутствует закрытый контейнер: " + way);
                         return;
                     }
                     if (getCertName(way) == "")
                     {
-                        showError("В папке отсутствует сертификат");
+                        showError("Отсутствует сертификат: " + way);
                         return;
                     }
                 }
@@ -356,21 +340,9 @@ namespace CryptoProHelper
         {
             Invoke((Action)(() =>
             {
-                Text = type;
+                listBox1.Items.Add(type);
                 SystemSounds.Hand.Play();
-                this.BackColor = Color.Red;
-                errTimer.Start();
             }));
-        }
-
-        private void errTimer_Tick(object sender, EventArgs e)
-        {
-            Invoke((Action)(() =>
-            {
-                Text = "CryptoPRO Helper";
-                this.BackColor = Color.White;
-            }));
-            errTimer.Stop();
         }
 
         void replaceListBox(int pos, string two)
@@ -428,10 +400,15 @@ namespace CryptoProHelper
 
         private void открытьВеткуРеестраToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            RegistryKey myKey = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Applets\Regedit", true);
+            RegistryKey myKey = Registry.CurrentUser.CreateSubKey(@"Software\Microsoft\Windows\CurrentVersion\Applets\Regedit");
             myKey.SetValue("LastKey", "HKEY_LOCAL_MACHINE\\SOFTWARE\\WOW6432Node\\Crypto Pro\\Settings\\Users\\" + SID + "\\Keys\\", RegistryValueKind.String);
             myKey.Close();
-            Process.Start("regedit");
+
+            Process proc = new Process();
+            proc.StartInfo.FileName = "regedit";
+            proc.StartInfo.UseShellExecute = true;
+            proc.StartInfo.Verb = "runas";
+            proc.Start();
         }
 
         private void плагинChromeToolStripMenuItem_Click(object sender, EventArgs e)
@@ -496,7 +473,7 @@ namespace CryptoProHelper
                 installComplete = true;
                 progressBar1.Value = 0;
                 button1.Text = "Установить";
-                if (autoinstBox.Checked) { Environment.Exit(1); }
+                if (autoinstBox.Checked && !startArgsInstallError) { Environment.Exit(1); }
             }
         }
 
@@ -594,6 +571,30 @@ namespace CryptoProHelper
             {
                 MessageBox.Show("ЭЦП будут автоматически устанавливаться при drag & drop'e на cryptoprohelper.exe", "Автоустановка", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            #region Start Args
+            try
+            {
+                if (startArgs.Length > 0)
+                {
+                    foreach (string file in startArgs)
+                    {
+                        addWays(file);
+                    }
+                    if (autoinstBox.Checked)
+                    {
+                        button1_Click(null, null);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Start Args", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            #endregion
         }
     }
 }
