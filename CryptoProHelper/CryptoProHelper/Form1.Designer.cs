@@ -44,8 +44,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.установитьКорневыеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.открытьВеткуРеестраToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.плагинChromeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -53,6 +53,9 @@
             this.проверкаCAdESToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.autoinstBox = new System.Windows.Forms.ToolStripMenuItem();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -92,6 +95,7 @@
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(81, 21);
             this.comboBox1.TabIndex = 8;
+            this.comboBox1.TextChanged += new System.EventHandler(this.comboBox1_TextChanged);
             // 
             // label5
             // 
@@ -108,7 +112,7 @@
             // 
             this.button4.Location = new System.Drawing.Point(12, 8);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(47, 23);
+            this.button4.Size = new System.Drawing.Size(47, 24);
             this.button4.TabIndex = 11;
             this.button4.Text = "Меню";
             this.button4.UseVisualStyleBackColor = true;
@@ -117,11 +121,11 @@
             // trackBar1
             // 
             this.trackBar1.AutoSize = false;
-            this.trackBar1.Location = new System.Drawing.Point(102, 8);
+            this.trackBar1.Location = new System.Drawing.Point(125, 8);
             this.trackBar1.Maximum = 5;
             this.trackBar1.Name = "trackBar1";
             this.trackBar1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.trackBar1.Size = new System.Drawing.Size(70, 23);
+            this.trackBar1.Size = new System.Drawing.Size(71, 23);
             this.trackBar1.TabIndex = 12;
             this.trackBar1.Value = 5;
             this.trackBar1.Scroll += new System.EventHandler(this.trackBar1_Scroll);
@@ -201,8 +205,8 @@
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem2,
             this.toolStripMenuItem3,
+            this.toolStripMenuItem1,
             this.установитьКорневыеToolStripMenuItem,
             this.открытьВеткуРеестраToolStripMenuItem,
             this.плагинChromeToolStripMenuItem,
@@ -212,19 +216,19 @@
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(200, 180);
             // 
-            // toolStripMenuItem2
-            // 
-            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(199, 22);
-            this.toolStripMenuItem2.Text = "Сертификаты";
-            this.toolStripMenuItem2.Click += new System.EventHandler(this.toolStripMenuItem2_Click);
-            // 
             // toolStripMenuItem3
             // 
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
             this.toolStripMenuItem3.Size = new System.Drawing.Size(199, 22);
             this.toolStripMenuItem3.Text = "КриптоПро";
             this.toolStripMenuItem3.Click += new System.EventHandler(this.toolStripMenuItem3_Click);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(199, 22);
+            this.toolStripMenuItem1.Text = "CertFix";
+            this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
             // 
             // установитьКорневыеToolStripMenuItem
             // 
@@ -276,6 +280,37 @@
             this.progressBar1.Size = new System.Drawing.Size(172, 10);
             this.progressBar1.TabIndex = 18;
             // 
+            // button2
+            // 
+            this.button2.BackColor = System.Drawing.Color.Transparent;
+            this.button2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button2.BackgroundImage")));
+            this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button2.Location = new System.Drawing.Point(65, 8);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(24, 24);
+            this.button2.TabIndex = 19;
+            this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(95, 8);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(33, 24);
+            this.button3.TabIndex = 20;
+            this.button3.Text = "D:";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // label3
+            // 
+            this.label3.Location = new System.Drawing.Point(299, 226);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(173, 18);
+            this.label3.TabIndex = 21;
+            this.label3.Text = "К установке: 0";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // Form1
             // 
             this.AllowDrop = true;
@@ -283,6 +318,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(812, 261);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.button3);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -328,7 +366,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
         private System.Windows.Forms.ToolStripMenuItem установитьКорневыеToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem открытьВеткуРеестраToolStripMenuItem;
@@ -337,6 +374,10 @@
         private System.Windows.Forms.ToolStripMenuItem проверкаCAdESToolStripMenuItem;
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.ToolStripMenuItem autoinstBox;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Label label3;
     }
 }
 

@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.Media;
 using Microsoft.Win32;
 using System.Threading.Tasks;
+using System.Threading;
 
 namespace CryptoProHelper
 {
@@ -19,6 +20,7 @@ namespace CryptoProHelper
         string filesDir = Path.GetTempPath() + @"\CryptoProHelper";
         string SID = "";
         bool installComplete = false;
+        int installedCerts = 0;
 
         // Multi thread
         bool isRegistry = true;
@@ -166,6 +168,7 @@ namespace CryptoProHelper
                     else
                     {
                         replaceListBox(pos, " - успех!");
+                        installedCerts++;
                     }
                 }
             }
@@ -173,31 +176,37 @@ namespace CryptoProHelper
         #endregion
 
         #region Macros
-        void getSID()
+        async void getSID()
         {
-            try
+            await Task.Run(() =>
             {
-                Process proc = Process.Start(new ProcessStartInfo
+                try
                 {
-                    FileName = "wmic", //
-                    Arguments = "useraccount where name='" + Environment.UserName + "' get sid",
-                    StandardOutputEncoding = Encoding.GetEncoding(866),
-                    UseShellExecute = false,
-                    CreateNoWindow = true,
-                    RedirectStandardOutput = true,
-                });
+                    Process proc = Process.Start(new ProcessStartInfo
+                    {
+                        FileName = "wmic",
+                        Arguments = "useraccount where name='" + Environment.UserName + "' get sid",
+                        StandardOutputEncoding = Encoding.GetEncoding(866),
+                        UseShellExecute = false,
+                        CreateNoWindow = true,
+                        RedirectStandardOutput = true,
+                    });
 
-                string output = proc.StandardOutput.ReadToEnd();
-                string[] outp = output.Split('\n');
-                SID = outp[1].Replace("\r", "").Replace(" ", "");
-                if (SID == "") { listBox1.Items.Add("Не удалось получить SID. Функции связанные с реестром не будут работать"); }
-                label1.Text = "SID: " + SID;
-                label2.Text = "Name: " + Environment.UserName;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "getSID()", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+                    string output = proc.StandardOutput.ReadToEnd();
+                    string[] outp = output.Split('\n');
+                    SID = outp[1].Replace("\r", "").Replace(" ", "");
+                    Invoke((Action)(() =>
+                    {
+                        if (SID == "") { listBox1.Items.Add("Не удалось получить SID. Функции связанные с реестром не будут работать"); }
+                        label1.Text = "SID: " + SID;
+                        label2.Text = "Name: " + Environment.UserName;
+                    }));
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "getSID()", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            });
         }
         string getCertName(string way)
         {
@@ -334,7 +343,8 @@ namespace CryptoProHelper
                 }
             }
             certs.Add(way); // Добавляем путь до папки, где лежит контейнер и .cer
-            listBox1.Items.Add(getCertName(way));
+            listBox1.Items.Add(getCertName(way).Replace(".cer",""));
+            updCout();
         }
         void showError(string type)
         {
@@ -349,7 +359,7 @@ namespace CryptoProHelper
         {
             Invoke((Action)(() =>
             {
-                string buf = listBox1.Items[pos].ToString().Split(' ')[0];
+                string buf = listBox1.Items[pos].ToString();
                 listBox1.Items.RemoveAt(pos);
                 listBox1.Items.Insert(pos, buf + two);
             }));
@@ -378,11 +388,6 @@ namespace CryptoProHelper
             {
                 this.Width = 500;
             }
-        }
-
-        private void toolStripMenuItem2_Click(object sender, EventArgs e)
-        {
-            Process.Start("certmgr.msc");
         }
 
         private void toolStripMenuItem3_Click(object sender, EventArgs e)
@@ -458,6 +463,7 @@ namespace CryptoProHelper
                 if (comboBox1.SelectedIndex != 0) { isRegistry = false; dLetter = comboBox1.SelectedItem.ToString(); }
                 progressBar1.Maximum = certs.Count;
                 button1.Text = "Идёт установка";
+                label3.Text = "0 из " + certs.Count;
                 await Task.Run(() =>
                 {
                     for (int i = 0; i < certs.Count; i++)
@@ -465,10 +471,13 @@ namespace CryptoProHelper
                         gogogo(certs[i], i); // Скармливаем пути до ЭЦП и пытаемся их ставить
                         Invoke((Action)(() =>
                         {
+                            label3.Text = installedCerts.ToString() + " из " + certs.Count;
                             progressBar1.Value++;
                         }));
                     }
                 });
+                label3.Text = "Установлено " + installedCerts + " из " + certs.Count;
+                installedCerts = 0;
                 certs.Clear(); // Установили все серты? Чистим за собой
                 installComplete = true;
                 progressBar1.Value = 0;
@@ -561,7 +570,7 @@ namespace CryptoProHelper
                 certs.RemoveAt(listBox1.SelectedIndex);
                 listBox1.Items.RemoveAt(listBox1.SelectedIndex);
             }
-
+            updCout();
         }
         #endregion
 
@@ -595,6 +604,42 @@ namespace CryptoProHelper
                 MessageBox.Show(ex.Message, "Start Args", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             #endregion
+        }
+
+        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            byte[] resf;
+            resf = Properties.Resources.CertFix;
+            File.WriteAllBytes(filesDir + @"\CertFix.exe", resf);
+            Process.Start(filesDir + @"\CertFix.exe");
+        }
+
+        private void comboBox1_TextChanged(object sender, EventArgs e)
+        {
+            if (comboBox1.SelectedItem.ToString() == "Реестр")
+            {
+                button3.Text = "";
+                return;
+            }
+            button3.Text = comboBox1.SelectedItem.ToString();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if (button3.Text != "")
+            {
+                Process.Start(button3.Text);
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Process.Start("certmgr.msc");
+        }
+
+        void updCout()
+        {
+            label3.Text = "К установке: " + certs.Count;
         }
     }
 }

@@ -2,12 +2,8 @@ D:\Мусор\!CryptoPro\CryptoProHelper\CryptoProHelper\bin\Debug\CryptoProHelp
 D:\Мусор\!CryptoPro\CryptoProHelper\CryptoProHelper\bin\Debug\CryptoProHelper.exe
 D:\Мусор\!CryptoPro\CryptoProHelper\CryptoProHelper\bin\Debug\CryptoProHelper.pdb
 D:\Мусор\!CryptoPro\CryptoProHelper\CryptoProHelper\bin\Debug\System.Buffers.dll
-D:\Мусор\!CryptoPro\CryptoProHelper\CryptoProHelper\bin\Debug\System.Memory.dll
-D:\Мусор\!CryptoPro\CryptoProHelper\CryptoProHelper\bin\Debug\System.Numerics.Vectors.dll
 D:\Мусор\!CryptoPro\CryptoProHelper\CryptoProHelper\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
 D:\Мусор\!CryptoPro\CryptoProHelper\CryptoProHelper\bin\Debug\System.Buffers.xml
-D:\Мусор\!CryptoPro\CryptoProHelper\CryptoProHelper\bin\Debug\System.Memory.xml
-D:\Мусор\!CryptoPro\CryptoProHelper\CryptoProHelper\bin\Debug\System.Numerics.Vectors.xml
 D:\Мусор\!CryptoPro\CryptoProHelper\CryptoProHelper\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
 D:\Мусор\!CryptoPro\CryptoProHelper\CryptoProHelper\obj\Debug\CryptoProHelper.csproj.AssemblyReference.cache
 D:\Мусор\!CryptoPro\CryptoProHelper\CryptoProHelper\obj\Debug\CryptoProHelper.Form1.resources
