@@ -10,6 +10,7 @@ D:\Мусор\!CryptoPro\CryptoProHelper\CryptoProHelper\obj\Debug\CryptoProHelp
 D:\Мусор\!CryptoPro\CryptoProHelper\CryptoProHelper\obj\Debug\CryptoProHelper.Properties.Resources.resources
 D:\Мусор\!CryptoPro\CryptoProHelper\CryptoProHelper\obj\Debug\CryptoProHelper.csproj.GenerateResource.cache
 D:\Мусор\!CryptoPro\CryptoProHelper\CryptoProHelper\obj\Debug\CryptoProHelper.csproj.CoreCompileInputs.cache
-D:\Мусор\!CryptoPro\CryptoProHelper\CryptoProHelper\obj\Debug\CryptoProHelper.csproj.CopyComplete
 D:\Мусор\!CryptoPro\CryptoProHelper\CryptoProHelper\obj\Debug\CryptoProHelper.exe
 D:\Мусор\!CryptoPro\CryptoProHelper\CryptoProHelper\obj\Debug\CryptoProHelper.pdb
+D:\Мусор\!CryptoPro\CryptoProHelper\CryptoProHelper\obj\Debug\CryptoProHelper.Form2.resources
+D:\Мусор\!CryptoPro\CryptoProHelper\CryptoProHelper\obj\Debug\CryptoPr.95A94B57.Up2Date

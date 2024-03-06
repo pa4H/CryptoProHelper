@@ -56,6 +56,7 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
+            this.pfxГенераторToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -212,9 +213,10 @@
             this.плагинChromeToolStripMenuItem,
             this.cAdESYandexToolStripMenuItem,
             this.проверкаCAdESToolStripMenuItem,
-            this.autoinstBox});
+            this.autoinstBox,
+            this.pfxГенераторToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(200, 180);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(200, 224);
             // 
             // toolStripMenuItem3
             // 
@@ -311,6 +313,13 @@
             this.label3.Text = "К установке: 0";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // pfxГенераторToolStripMenuItem
+            // 
+            this.pfxГенераторToolStripMenuItem.Name = "pfxГенераторToolStripMenuItem";
+            this.pfxГенераторToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
+            this.pfxГенераторToolStripMenuItem.Text = ".pfx генератор";
+            this.pfxГенераторToolStripMenuItem.Click += new System.EventHandler(this.pfxГенераторToolStripMenuItem_Click);
+            // 
             // Form1
             // 
             this.AllowDrop = true;
@@ -378,6 +387,7 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ToolStripMenuItem pfxГенераторToolStripMenuItem;
     }
 }
 

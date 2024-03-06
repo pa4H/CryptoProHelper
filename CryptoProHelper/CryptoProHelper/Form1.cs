@@ -641,5 +641,11 @@ namespace CryptoProHelper
         {
             label3.Text = "К установке: " + certs.Count;
         }
+
+        private void pfxГенераторToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form2 f = new Form2();
+            f.Show();
+        }
     }
 }
