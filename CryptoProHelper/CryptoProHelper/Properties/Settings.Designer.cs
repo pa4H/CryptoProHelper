@@ -37,10 +37,10 @@ namespace CryptoProHelper.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0.8")]
-        public double opacity {
+        [global::System.Configuration.DefaultSettingValueAttribute("10")]
+        public int opacity {
             get {
-                return ((double)(this["opacity"]));
+                return ((int)(this["opacity"]));
             }
             set {
                 this["opacity"] = value;
@@ -61,13 +61,25 @@ namespace CryptoProHelper.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool autoPass {
             get {
                 return ((bool)(this["autoPass"]));
             }
             set {
                 this["autoPass"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool autoInst {
+            get {
+                return ((bool)(this["autoInst"]));
+            }
+            set {
+                this["autoInst"] = value;
             }
         }
     }

@@ -63,29 +63,9 @@ namespace CryptoProHelper.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Byte[].
         /// </summary>
-        internal static byte[] CertFix {
-            get {
-                object obj = ResourceManager.GetObject("CertFix", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Поиск локализованного ресурса типа System.Byte[].
-        /// </summary>
         internal static byte[] Certificates_Kontur_Admin {
             get {
                 object obj = ResourceManager.GetObject("Certificates_Kontur_Admin", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Поиск локализованного ресурса типа System.Byte[].
-        /// </summary>
-        internal static byte[] CryptoProPass {
-            get {
-                object obj = ResourceManager.GetObject("CryptoProPass", resourceCulture);
                 return ((byte[])(obj));
             }
         }

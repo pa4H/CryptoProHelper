@@ -5,13 +5,16 @@
     <Setting Name="topMost" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="opacity" Type="System.Double" Scope="User">
-      <Value Profile="(Default)">0.8</Value>
+    <Setting Name="opacity" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">10</Value>
     </Setting>
     <Setting Name="contPass" Type="System.String" Scope="User">
       <Value Profile="(Default)">123456789</Value>
     </Setting>
     <Setting Name="autoPass" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="autoInst" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
   </Settings>

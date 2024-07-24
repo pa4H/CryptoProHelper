@@ -30,7 +30,7 @@ namespace CryptoProHelper
         {
             if (IDs.Count < 1)
             {
-                showError("Серты не найдены");
+                printError("Серты не найдены");
             }
             else
             {
@@ -71,14 +71,14 @@ namespace CryptoProHelper
             }
             if (!setError)
             {
-                replaceListBox(pos, " - успех!");
+                replListBox(pos, " - успех!");
             }
             else
             {
-                replaceListBox(pos, " - ошибка!");
+                replListBox(pos, " - ошибка!");
             }
         }
-        void replaceListBox(int pos, string two)
+        void replListBox(int pos, string two)
         {
             Invoke((Action)(() =>
             {
@@ -87,7 +87,7 @@ namespace CryptoProHelper
                 listBox1.Items.Insert(pos, buf + two);
             }));
         }
-        void showError(string type)
+        void printError(string type)
         {
             Invoke((Action)(() =>
             {
